@@ -1,0 +1,9 @@
+.next/
+node_modules/
+.idea
+
+*.log
+.env
+.DS_Store
+
+.now
