@@ -18,7 +18,6 @@ const Layout = ({ children, title, isAuthenticated, deauthenticate }) => (
         {!isAuthenticated && <Link href="/signup"><a>Sign Up</a></Link>}
         {isAuthenticated && <li onClick={deauthenticate}><a>Sign Out</a></li>}
         {isAuthenticated && <Link href="/bingo"><a>Bingo</a></Link>}
-        <Link href="/whoami"><a>Who Am I</a></Link>
       </ul>
     </div>
 
