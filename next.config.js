@@ -1,15 +1,17 @@
 module.exports = {
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.module.rules.push({
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          // eslint options (if necessary)
-        },
-      });
-    }
-    return config;
-  },
-};
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.worker\.js$/,
+      loader: 'worker-loader',
+      options: {
+        name: 'static/[hash].worker.js',
+        publicPath: '/_next/'
+      }
+    })
+
+    // Overcome Webpack referencing `window` in chunks
+    config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`
+
+    return config
+  }
+}
