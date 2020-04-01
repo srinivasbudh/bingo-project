@@ -4,6 +4,11 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import Layout from '../components/Layout';
 
+
+function setRegistrationSuccessMessage(){
+  document.getElementById('registrationStatus').innerHTML='Registration Successful Please SignIn';
+}
+
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -19,16 +24,18 @@ class Signup extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.authenticate(
-      { email: this.state.email, password: this.state.password },
-      'signup'
+    this.props.register(
+      { username: this.state.email, password: this.state.password },
+      'bingo-rest/user/register'
     );
+    setRegistrationSuccessMessage();
   }
 
   render() {
     return (
       <Layout title="Sign Up">
-        <h3 className="title is-3">Sign Up</h3>
+        <h3 className="title is-3" >Sign Up</h3>
+        <h4 id="registrationStatus" className="title is-5" style={{ color: 'green' }}></h4>
         <form
           onSubmit={this.handleSubmit.bind(this)}
           className="container"
@@ -70,7 +77,7 @@ class Signup extends React.Component {
           <div className="field">
             <p className="control has-text-centered">
               <button type="submit" className="button is-success">
-                Sign In
+                Sign Up
               </button>
             </p>
           </div>

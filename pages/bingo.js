@@ -46,9 +46,13 @@ function runPop(value,className){
   }
 
 }
+
+function getTokenCount(){
+
+}
 const Bingo = () => (
   <Layout title="Home">
-    <main>
+    <main onload="getTokenCount()">
       <div id="content">
         <button id="generateFreeBtn" onClick={() => newCard('generateFreeBtn')}>Generate Bingo Coupon</button>
         <table id="bingotable">

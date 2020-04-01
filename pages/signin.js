@@ -20,8 +20,8 @@ class Signin extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.authenticate(
-      { email: this.state.email, password: this.state.password },
-      'signin'
+      { username: this.state.email, password: this.state.password },
+      'bingo-rest/user/login'
     );
   }
 
