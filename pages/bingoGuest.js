@@ -39,7 +39,10 @@ function runPop(value,className){
 const BingoGuest = ({bingoArray}) => (
   <Layout title="Home">
     <main>
-      <div id="content">
+    <head>
+         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      </head>
+      <div id="content" class="table-responsive" class="table">
         <button id="generateFreeBtn" onClick={() => newCard('generateFreeBtn',bingoArray)}>Get your Bingo Coupon</button>
         <table id="bingotable">
         <tbody>
@@ -119,16 +122,7 @@ const BingoGuest = ({bingoArray}) => (
                 background: #5dc4de;
                 text-align: center;
                 font-weight: 600;
-                font-size: 15pt;
-              }
-
-              #bingotable {
-                margin: 0 auto;
-                text-align: center;
-                width: 400px;
-                height: 400px;
-                border-collapse: collapse;
-                background: white;
+                font-size: 1.5em;
               }
 
               td{
@@ -192,29 +186,34 @@ const BingoGuest = ({bingoArray}) => (
                 border: none;
                 color: black;
                 margin: 0 auto;
-                padding: 15px 32px;
+                padding: 1.5em;
                 text-align: center;
                 text-decoration: none;
-                display: inline-block;
-                font-size: 18px;
                 font-style: italic;
                 font-weight: bold;
+                font-size: 1.5em;
                 cursor: pointer;
                 border-radius: 15%;
                 border: 3px solid black;
                 width: 100%;
                 height: 100%
+                display: -webkit-flex;
+                  display: -ms-flexbox;
+                  display: flex;
+                  -webkit-flex-direction: column;
+                  -ms-flex-direction: column;
+                  flex-direction: column;
               }
               .button3{
                 background-color: #90EE90;
                 border: none;
                 color: black;
                 margin: 0 auto;
-                padding: 15px 32px;
+                padding: 1.5em;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 18px;
+                font-size: 1.5em;
                 font-style: italic;
                 font-weight: bold;
                 cursor: pointer;
@@ -222,9 +221,33 @@ const BingoGuest = ({bingoArray}) => (
                 border: 3px solid black;
                 width: 100%;
                 height: 100%
+                display: -webkit-flex;
+                                  display: -ms-flexbox;
+                                  display: flex;
+                                  -webkit-flex-direction: column;
+                                  -ms-flex-direction: column;
+                                  flex-direction: column;
+              }
+              @media only screen and (max-width:800px) {
+                /* For tablets: */
+                .main, .button3, .button2, .main, .right{
+                  width: 100%;
+                  padding: 0;
+                }
+                .right {
+                  width: 100%;
+                }
+              }
+              @media only screen and (max-width:500px) {
+                /* For mobile phones: */
+                .menu, .main, .right{
+                  width: 100%;
+                }
+                .button3,.button2{
+                  width:100%;
+                }
               }
              `}</style>
-
     </main>
   </Layout>
 );
