@@ -17,18 +17,23 @@ class Signup extends React.Component {
     initialize(ctx);
   }
 
+  setRegistrationSuccessMessage(){
+    document.getElementById('registrationStatus').innerHTML='Registration failed';
+  }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.authenticate(
-      { email: this.state.email, password: this.state.password },
-      'signup'
+    this.props.register(
+      { username: this.state.email, password: this.state.password },
+      'bingo-rest/user/register'
     );
+    this.setRegistrationSuccessMessage();
   }
 
   render() {
     return (
       <Layout title="Sign Up">
-        <h3 className="title is-3">Sign Up</h3>
+        <h3 className="title is-3" >Sign Up</h3>
+        <h4 id="registrationStatus" className="title is-5" style={{ color: 'red' }}></h4>
         <form
           onSubmit={this.handleSubmit.bind(this)}
           className="container"
@@ -70,7 +75,7 @@ class Signup extends React.Component {
           <div className="field">
             <p className="control has-text-centered">
               <button type="submit" className="button is-success">
-                Sign In
+                Sign Up
               </button>
             </p>
           </div>

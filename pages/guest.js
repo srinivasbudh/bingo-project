@@ -4,7 +4,7 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import Layout from '../components/Layout';
 
-class Signin extends React.Component {
+class Guest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,10 +19,15 @@ class Signin extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.authenticate(
-      { username: this.state.email, password: this.state.password },
-      'bingo-rest/user/login'
-    );
+    if(this.state.user=='new'){
+      this.props.createToken(
+            { username: this.state.email}
+          );
+    }else{
+      this.props.get(
+            { username: this.state.email}
+       );
+    }
   }
 
   render() {
@@ -52,25 +57,10 @@ class Signin extends React.Component {
               </span>
             </p>
           </div>
-          <div className="field">
-            <p className="control has-icons-left">
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                required
-                value={this.state.password}
-                onChange={e => this.setState({ password: e.target.value })}
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-lock" />
-              </span>
-            </p>
-          </div>
-          <div className="field">
+           <div className="field">
             <p className="control has-text-centered">
-              <button type="submit" className="button is-success">
-                Sign In
+              <button type="submit" className="button is-success" onClick={e => this.setState({ user: 'new' })}>
+                Continue as Guest
               </button>
             </p>
           </div>
@@ -83,4 +73,4 @@ class Signin extends React.Component {
 export default connect(
   state => state,
   actions
-)(Signin);
+)(Guest);

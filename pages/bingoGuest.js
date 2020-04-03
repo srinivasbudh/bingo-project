@@ -36,7 +36,7 @@ function runPop(value,className){
 }
 
 
-const Bingo = ({bingoArray}) => (
+const BingoGuest = ({bingoArray}) => (
   <Layout title="Home">
     <main>
       <div id="content">
@@ -229,38 +229,21 @@ const Bingo = ({bingoArray}) => (
   </Layout>
 );
 
-Bingo.getInitialProps = async ctx => {
+BingoGuest.getInitialProps = async ctx => {
   initialize(ctx);
-  const token = ctx.store.getState().authentication.token;
-  if (token) {
-    const response = await axios.get(`${API}/bingo-rest/bingo/count`,{
-             params: {
-               sessionId: token
-               }
-             });
-    const count = response.data;
-     console.log(count)
-      if(count==0){
-        const responseToken = await axios.get(`${API}/bingo-rest/bingo/create`,{
-                     params: {
-                       sessionId: token,
-                       }
-                     });
-           const bingoArray =responseToken.data;
-            return {bingoArray};
-           }else{
-        const responseToken = await axios.get(`${API}/bingo-rest/bingo/get`,{
-                       params: {
-                         sessionId: token
-                         }
-                       });
-             const bingoArray =responseToken.data[0];
-             return {bingoArray};
-          }
-          }
+  const username = ctx.store.getState().authentication.registerMessage;
+  if (username) {
+    const responseToken = await axios.get(`${API}/bingo-rest/bingo/get/username`,{
+                           params: {
+                             username: username
+                             }
+                           });
+                 const bingoArray =responseToken.data[0];
+                 return {bingoArray};
+   }
 };
 
 
 export default connect(
   state => state
-)(Bingo);
+)(BingoGuest);

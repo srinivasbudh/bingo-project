@@ -5,19 +5,60 @@ import { API } from '../../config';
 import { setCookie, removeCookie } from '../../utils/cookie';
 
 // gets token from the api and stores it in the redux store and in cookie
-const authenticate = ({ email, password }, type) => {
-  if (type !== 'signin' && type !== 'signup') {
-    throw new Error('Wrong API call!');
-  }
+const authenticate = ({ username, password }, type) => {
   return (dispatch) => {
-    axios.post(`${API}/${type}`, { email, password })
+    axios.post(`${API}/${type}`, { username, password })
       .then((response) => {
-        setCookie('token', response.data.token);
-        Router.push('/');
-        dispatch({type: AUTHENTICATE, payload: response.data.token});
+        setCookie('token', response.data.sessionId);
+        if(response.data.loginSuccess){
+          Router.push('/bingo');
+          dispatch({type: AUTHENTICATE, payload: response.data.sessionId, loginMessage: "Success"});
+        }else{
+          dispatch({type: DEAUTHENTICATE, loginMessage: "Failure"});
+          throw new Error();
+        }
       })
       .catch((err) => {
-        throw new Error(err);
+        alert('Please enter Valid Credentials');
+      });
+  };
+};
+
+// gets token from the api and stores it in the redux store and in cookie
+const register = ({ username, password }, type) => {
+  return (dispatch) => {
+    axios.post(`${API}/${type}`, { username, password })
+      .then((response) => {
+        if(response.data.successful){
+         dispatch({type:DEAUTHENTICATE, registerMessage: "Success"});
+          Router.push('/signin');
+        }else{
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        alert('User already Exists please enter another username, we dont have reset password option for now');
+      });
+  };
+};
+
+const createToken = ({ username }) => {
+  return (dispatch) => {
+    axios.get(`${API}/bingo-rest/bingo/create/guest`,{
+                  params: {
+                    username: username
+                    }
+                  })
+      .then((response) => {
+        if(response.data){
+          dispatch({type:DEAUTHENTICATE, registerMessage: username});
+          Router.push('/bingoGuest');
+        }else{
+          dispatch({type: DEAUTHENTICATE});
+        }
+      })
+      .catch((err) => {
+        alert('Something went wrong Please try again later');
       });
   };
 };
@@ -43,4 +84,6 @@ export default {
   authenticate,
   reauthenticate,
   deauthenticate,
+  createToken,
+  register
 };
