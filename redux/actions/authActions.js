@@ -12,13 +12,14 @@ const authenticate = ({ username, password }, type) => {
         setCookie('token', response.data.sessionId);
         if(response.data.loginSuccess){
           Router.push('/bingo');
-          dispatch({type: AUTHENTICATE, payload: response.data.sessionId});
+          dispatch({type: AUTHENTICATE, payload: response.data.sessionId, loginMessage: "Success"});
         }else{
-          dispatch({type: DEAUTHENTICATE});
+          dispatch({type: DEAUTHENTICATE, loginMessage: "Failure"});
+          throw new Error();
         }
       })
       .catch((err) => {
-        throw new Error(err);
+        alert('Please enter Valid Credentials');
       });
   };
 };
@@ -29,13 +30,35 @@ const register = ({ username, password }, type) => {
     axios.post(`${API}/${type}`, { username, password })
       .then((response) => {
         if(response.data.successful){
+         dispatch({type:DEAUTHENTICATE, registerMessage: "Success"});
           Router.push('/signin');
+        }else{
+          throw new Error();
+        }
+      })
+      .catch((err) => {
+        alert('User already Exists please enter another username, we dont have reset password option for now');
+      });
+  };
+};
+
+const createToken = ({ username }) => {
+  return (dispatch) => {
+    axios.get(`${API}/bingo-rest/bingo/create/guest`,{
+                  params: {
+                    username: username
+                    }
+                  })
+      .then((response) => {
+        if(response.data){
+          dispatch({type:DEAUTHENTICATE, registerMessage: username});
+          Router.push('/bingoGuest');
         }else{
           dispatch({type: DEAUTHENTICATE});
         }
       })
       .catch((err) => {
-        throw new Error(err);
+        alert('Something went wrong Please try again later');
       });
   };
 };
@@ -61,5 +84,6 @@ export default {
   authenticate,
   reauthenticate,
   deauthenticate,
+  createToken,
   register
 };

@@ -4,7 +4,7 @@ import actions from '../redux/actions';
 import initialize from '../utils/initialize';
 import Layout from '../components/Layout';
 
-class Signup extends React.Component {
+class Guest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,23 +17,23 @@ class Signup extends React.Component {
     initialize(ctx);
   }
 
-  setRegistrationSuccessMessage(){
-    document.getElementById('registrationStatus').innerHTML='Registration failed';
-  }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.register(
-      { username: this.state.email, password: this.state.password },
-      'bingo-rest/user/register'
-    );
-    this.setRegistrationSuccessMessage();
+    if(this.state.user=='new'){
+      this.props.createToken(
+            { username: this.state.email}
+          );
+    }else{
+      this.props.get(
+            { username: this.state.email}
+       );
+    }
   }
 
   render() {
     return (
-      <Layout title="Sign Up">
-        <h3 className="title is-3" >Sign Up</h3>
-        <h4 id="registrationStatus" className="title is-5" style={{ color: 'red' }}></h4>
+      <Layout title="Sign In">
+        <h3 className="title is-3">Sign In</h3>
         <form
           onSubmit={this.handleSubmit.bind(this)}
           className="container"
@@ -57,25 +57,10 @@ class Signup extends React.Component {
               </span>
             </p>
           </div>
-          <div className="field">
-            <p className="control has-icons-left">
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                required
-                value={this.state.password}
-                onChange={e => this.setState({ password: e.target.value })}
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-lock" />
-              </span>
-            </p>
-          </div>
-          <div className="field">
+           <div className="field">
             <p className="control has-text-centered">
-              <button type="submit" className="button is-success">
-                Sign Up
+              <button type="submit" className="button is-success" onClick={e => this.setState({ user: 'new' })}>
+                Continue as Guest
               </button>
             </p>
           </div>
@@ -88,4 +73,4 @@ class Signup extends React.Component {
 export default connect(
   state => state,
   actions
-)(Signup);
+)(Guest);
