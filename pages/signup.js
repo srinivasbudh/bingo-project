@@ -17,16 +17,16 @@ class Signup extends React.Component {
     initialize(ctx);
   }
 
-  setRegistrationSuccessMessage(){
+ /* setRegistrationSuccessMessage(){
     document.getElementById('registrationStatus').innerHTML='Registration failed';
-  }
+  }*/
   handleSubmit(e) {
     e.preventDefault();
     this.props.register(
       { username: this.state.email, password: this.state.password },
       'bingo-rest/user/register'
     );
-    this.setRegistrationSuccessMessage();
+    //this.setRegistrationSuccessMessage();
   }
 
   render() {

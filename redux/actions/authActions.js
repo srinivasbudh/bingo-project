@@ -32,6 +32,7 @@ const register = ({ username, password }, type) => {
         if(response.data.successful){
          dispatch({type:DEAUTHENTICATE, registerMessage: "Success"});
           Router.push('/signin');
+          alert('Registration successful please login now')
         }else{
           throw new Error();
         }

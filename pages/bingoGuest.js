@@ -42,7 +42,7 @@ const BingoGuest = ({bingoArray}) => (
     <head>
          <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
-      <div id="content" class="table-responsive" class="table">
+      <div id="content">
         <button id="generateFreeBtn" onClick={() => newCard('generateFreeBtn',bingoArray)}>Get your Bingo Coupon</button>
         <table id="bingotable">
         <tbody>

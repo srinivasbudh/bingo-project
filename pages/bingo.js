@@ -90,139 +90,160 @@ const Bingo = ({bingoArray}) => (
       </div>
 
       <style jsx>{`
-              main {
-                background: #1abc9c;
-                display: flex;
-                height: 100vh;
-                align-content: center;
-                justify-content: center;
-                align-items: center;
-              }
+             main {
+                             background: #1abc9c;
+                             display: flex;
+                             height: 100vh;
+                             align-content: center;
+                             justify-content: center;
+                             align-items: center;
+                           }
 
-              h1, p {
-                font-family: 'Roboto', sans-serif; font-size: 20pt;
-                font-weight: 600;
-                margin: 0 auto;
-                text-align: center;
-                padding: 30px;
-                color: white;
-              }
+                           h1, p {
+                             font-family: 'Roboto', sans-serif; font-size: 20pt;
+                             font-weight: 600;
+                             margin: 0 auto;
+                             text-align: center;
+                             padding: 30px;
+                             color: white;
+                           }
 
-              p a {
-                text-decoration: none;
-                color: #f1c40f;
-              }
+                           p a {
+                             text-decoration: none;
+                             color: #f1c40f;
+                           }
 
-              #squarefree {
-                font-family: Helvetica;
-                margin: 0 auto;
-                background: #5dc4de;
-                text-align: center;
-                font-weight: 600;
-                font-size: 15pt;
-              }
+                           #squarefree {
+                             font-family: Helvetica;
+                             margin: 0 auto;
+                             background: #5dc4de;
+                             text-align: center;
+                             font-weight: 600;
+                             font-size: 1.5em;
+                           }
 
-              #bingotable {
-                margin: 0 auto;
-                text-align: center;
-                width: 400px;
-                height: 400px;
-                border-collapse: collapse;
-                background: white;
-              }
+                           td{
+                             font-family: Helvetica;
+                             margin: 0 auto;
+                             text-align: center;
+                             border: 3px solid black;
+                             width: 20%;
+                           }
+                           input {
+                               font-family: Helvetica;
+                               margin: 0 auto;
+                               text-align: center;
+                               border: 3px solid black;
+                               width: 100%;
+                               height: 100%;
+                           }
+                           th {
+                                font-family: Helvetica;
+                                margin: 0 auto;
+                                text-align: center;
+                                border: 3px solid black;
+                                width: 20%;
+                                color: #f1c40f;
+                                 background: #9b59b6;
+                              }
 
-              td{
-                font-family: Helvetica;
-                margin: 0 auto;
-                text-align: center;
-                border: 3px solid black;
-                width: 20%;
-              }
-              input {
-                  font-family: Helvetica;
-                  margin: 0 auto;
-                  text-align: center;
-                  border: 3px solid black;
-                  width: 100%;
-                  height: 100%;
-              }
-              th {
-                   font-family: Helvetica;
-                   margin: 0 auto;
-                   text-align: center;
-                   border: 3px solid black;
-                   width: 20%;
-                   color: #f1c40f;
-                    background: #9b59b6;
-                 }
-
-              .orange {
-                background: #9b59b6;
-              }
-              button{
-                background-color: #FF7E00;
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: top;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 18px;
-                margin: 6px 4px;
-                cursor: pointer;
-                border: 3px solid black;
-                border-radius: 15%;
-              }
-              .button4 {
-                background-color: #FF7E00;
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: top;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 18px;
-                margin: 6px 4px;
-                cursor: pointer;
-                border: 3px solid black;
-                border-radius: 15%;
-              }
-              .button2{
-                background-color: #fffdd0;
-                border: none;
-                color: black;
-                margin: 0 auto;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 18px;
-                font-style: italic;
-                font-weight: bold;
-                cursor: pointer;
-                border-radius: 15%;
-                border: 3px solid black;
-                width: 100%;
-                height: 100%
-              }
-              .button3{
-                background-color: #90EE90;
-                border: none;
-                color: black;
-                margin: 0 auto;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 18px;
-                font-style: italic;
-                font-weight: bold;
-                cursor: pointer;
-                border-radius: 15%;
-                border: 3px solid black;
-                width: 100%;
-                height: 100%
-              }
+                           .orange {
+                             background: #9b59b6;
+                           }
+                           button{
+                             background-color: #FF7E00;
+                             border: none;
+                             color: white;
+                             padding: 15px 32px;
+                             text-align: top;
+                             text-decoration: none;
+                             display: inline-block;
+                             font-size: 18px;
+                             margin: 6px 4px;
+                             cursor: pointer;
+                             border: 3px solid black;
+                             border-radius: 15%;
+                           }
+                           .button4 {
+                             background-color: #FF7E00;
+                             border: none;
+                             color: white;
+                             padding: 15px 32px;
+                             text-align: top;
+                             text-decoration: none;
+                             display: inline-block;
+                             font-size: 18px;
+                             margin: 6px 4px;
+                             cursor: pointer;
+                             border: 3px solid black;
+                             border-radius: 15%;
+                           }
+                           .button2{
+                             background-color: #fffdd0;
+                             border: none;
+                             color: black;
+                             margin: 0 auto;
+                             padding: 1.5em;
+                             text-align: center;
+                             text-decoration: none;
+                             font-style: italic;
+                             font-weight: bold;
+                             font-size: 1.5em;
+                             cursor: pointer;
+                             border-radius: 15%;
+                             border: 3px solid black;
+                             width: 100%;
+                             height: 100%
+                             display: -webkit-flex;
+                               display: -ms-flexbox;
+                               display: flex;
+                               -webkit-flex-direction: column;
+                               -ms-flex-direction: column;
+                               flex-direction: column;
+                           }
+                           .button3{
+                             background-color: #90EE90;
+                             border: none;
+                             color: black;
+                             margin: 0 auto;
+                             padding: 1.5em;
+                             text-align: center;
+                             text-decoration: none;
+                             display: inline-block;
+                             font-size: 1.5em;
+                             font-style: italic;
+                             font-weight: bold;
+                             cursor: pointer;
+                             border-radius: 15%;
+                             border: 3px solid black;
+                             width: 100%;
+                             height: 100%
+                             display: -webkit-flex;
+                                               display: -ms-flexbox;
+                                               display: flex;
+                                               -webkit-flex-direction: column;
+                                               -ms-flex-direction: column;
+                                               flex-direction: column;
+                           }
+                           @media only screen and (max-width:800px) {
+                             /* For tablets: */
+                             .main, .button3, .button2, .main, .right{
+                               width: 100%;
+                               padding: 0;
+                             }
+                             .right {
+                               width: 100%;
+                             }
+                           }
+                           @media only screen and (max-width:500px) {
+                             /* For mobile phones: */
+                             .menu, .main, .right{
+                               width: 100%;
+                             }
+                             .button3,.button2{
+                               width:100%;
+                             }
+                           }
              `}</style>
 
     </main>
