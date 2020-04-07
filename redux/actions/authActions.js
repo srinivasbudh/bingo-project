@@ -45,22 +45,35 @@ const register = ({ username, password }, type) => {
 
 const createToken = ({ username }) => {
   return (dispatch) => {
-    axios.get(`${API}/bingo-rest/bingo/create/guest`,{
-                  params: {
-                    username: username
-                    }
+  const responseCount = axios.get(`${API}/bingo-rest/bingo/count/Guest`,{
+                 params: {
+                   username: username
+                   }
+                 }).then((responseCount)=>{
+                  if(responseCount.data==0){
+                      axios.get(`${API}/bingo-rest/bingo/create/guest`,{
+                                    params: {
+                                      username: username
+                                      }
+                                    })
+                        .then((response) => {
+                          if(response.data){
+                            dispatch({type:DEAUTHENTICATE, registerMessage: username});
+                            Router.push('/bingoGuest');
+                          }else{
+                            dispatch({type: DEAUTHENTICATE});
+                          }
+                        })
+                        .catch((err) => {
+                          alert('Something went wrong Please try again afterSomeTime');
+                        });
+                  }else{
+                  dispatch({type:DEAUTHENTICATE, registerMessage: username});
+                                              Router.push('/bingoGuest');}
                   })
-      .then((response) => {
-        if(response.data){
-          dispatch({type:DEAUTHENTICATE, registerMessage: username});
-          Router.push('/bingoGuest');
-        }else{
-          dispatch({type: DEAUTHENTICATE});
-        }
-      })
-      .catch((err) => {
-        alert('Something went wrong Please try again later');
-      });
+                  .catch((err) => {
+                                            alert('Something went wrong Please try again later');
+                                          });
   };
 };
 

@@ -19,15 +19,9 @@ class Guest extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if(this.state.user=='new'){
       this.props.createToken(
-            { username: this.state.email}
-          );
-    }else{
-      this.props.get(
-            { username: this.state.email}
-       );
-    }
+        { username: this.state.email}
+      );
   }
 
   render() {
@@ -59,7 +53,7 @@ class Guest extends React.Component {
           </div>
            <div className="field">
             <p className="control has-text-centered">
-              <button type="submit" className="button is-success" onClick={e => this.setState({ user: 'new' })}>
+              <button type="submit" className="button is-success">
                 Continue as Guest
               </button>
             </p>
