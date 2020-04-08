@@ -13,12 +13,12 @@ const Layout = ({ children, title, isAuthenticated, deauthenticate }) => (
     </Head>
     <div className="tabs is-centered">
       <ul>
-        <Link href="/"><a>Home</a></Link>
         {!isAuthenticated && <Link href="/signin"><a>Sign In</a></Link>}
         {!isAuthenticated && <Link href="/signup"><a>Sign Up</a></Link>}
         {isAuthenticated && <li onClick={deauthenticate}><a>Sign Out</a></li>}
         {isAuthenticated && <Link href="/bingo"><a>Bingo</a></Link>}
         {!isAuthenticated && <Link href="/guest"><a>Guest</a></Link>}
+        <Link href="/play"><a>How to play</a></Link>
       </ul>
     </div>
 
