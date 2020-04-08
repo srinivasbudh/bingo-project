@@ -53,7 +53,7 @@ function videoOperation(buttonName,url) {
 
 }
 
-const verifyResult = async (buttonName) => {
+const youtubeVideo = async (buttonName) => {
      const responseToken = await axios.get(`${API}/bingo-rest/bingo/getYouTubeLink`);
      if(responseToken.data=="Sorry we dont have any live streaming now"){
           alert(responseToken.data + "Please comeback later");
@@ -63,7 +63,7 @@ const verifyResult = async (buttonName) => {
 
     };
 
-    const youtubeVide = async (bingoArray, username,resultType) => {
+    const verifyResult = async (bingoArray, username,resultType) => {
          const responseToken = await axios.get(`${API}/bingo-rest/bingo/getWinners`,{
                           params: {
                             resultType:resultType,
@@ -76,7 +76,7 @@ const verifyResult = async (buttonName) => {
 const BingoGuest = ({bingoArray,username}) => (
 <Layout title="Home">
       <main>
-            <button id="youtubeBtn" type="button" onClick={() =>verifyResult(document.getElementById("youtubeBtn").innerHTML)}>Watch Live in Youtube</button>
+            <button id="youtubeBtn" type="button" onClick={() =>youtubeVideo(document.getElementById("youtubeBtn").innerHTML)}>Watch Live in Youtube</button>
              <div id="videoFrame" background ="#1abc9c"><iframe id="iframe" className="iframe" background ="#1abc9c" width="0" height="0" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
               <style jsx>{`
                 button{
