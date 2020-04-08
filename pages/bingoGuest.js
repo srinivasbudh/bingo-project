@@ -77,7 +77,7 @@ const BingoGuest = ({bingoArray,username}) => (
 <Layout title="Home">
       <main>
             <button id="youtubeBtn" type="button" onClick={() =>youtubeVideo(document.getElementById("youtubeBtn").innerHTML)}>Watch Live in Youtube</button>
-             <div id="videoFrame" background ="#1abc9c"><iframe id="iframe" className="iframe" background ="#1abc9c" width="0" height="0" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+             <div id="videoFrame" background ="#1abc9c"><iframe id="iframe" className="iframe" background ="#1abc9c" width="0" height="0" src="" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
               <style jsx>{`
                 button{
                   background-color: #9b59b6;

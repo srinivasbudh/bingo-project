@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import axios from 'axios';
 import { API } from '../config';
 import initialize from '../utils/initialize';
+import getResult from '../redux/actions/authActions';
 
 function newCard(id,bingoArray) {
   //Starting loop through each square card
@@ -36,6 +37,33 @@ function runPop(value,className){
 
 }
 
+function videoOperation(buttonName,url) {
+  if(buttonName=="Hide"){
+        document.getElementById("videoFrame").style.visibility = "hidden";
+        document.getElementById("iframe").src=""
+         document.getElementById("iframe").width="0"
+        document.getElementById("iframe").height="0"
+        document.getElementById("youtubeBtn").innerHTML="Watch Live in Youtube"
+  }else{
+    document.getElementById("videoFrame").style.visibility = "visible";
+      document.getElementById("iframe").src= url
+       document.getElementById("iframe").width="360"
+        document.getElementById("iframe").height="320"
+        document.getElementById("youtubeBtn").innerHTML="Hide"
+  }
+
+}
+
+const youtubeVideo = async (buttonName) => {
+     const responseToken = await axios.get(`${API}/bingo-rest/bingo/getYouTubeLink`);
+     if(responseToken.data=="Sorry we dont have any live streaming now"){
+          alert(responseToken.data + "Please comeback later");
+     }else{
+      videoOperation(buttonName,responseToken.data)
+     }
+
+    };
+
 const verifyResult = async (bingoArray, username,resultType) => {
      const responseToken = await axios.get(`${API}/bingo-rest/bingo/getWinners`,{
                       params: {
@@ -48,6 +76,25 @@ const verifyResult = async (bingoArray, username,resultType) => {
 
 const Bingo = ({bingoArray,token}) => (
 <Layout title="Home">
+<main>
+            <button id="youtubeBtn" type="button" onClick={() =>youtubeVideo(document.getElementById("youtubeBtn").innerHTML)}>Watch Live in Youtube</button>
+             <div id="videoFrame" background ="#1abc9c"><iframe id="iframe" className="iframe" background ="#1abc9c" width="0" height="0" src="" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
+              <style jsx>{`
+                button{
+                  background-color: #9b59b6;
+                  border: none;
+                  color: white;
+                  text-align: top;
+                  text-decoration: none;
+                  display: inline-block;
+                  font-size: 16px;
+                  margin: 6px 4px;
+                  cursor: pointer;
+                  border: 3px solid black;
+                  border-radius: 15%;
+                }
+              `}</style>
+      </main>
            <main>
              <div id="content">
                <button id="generateFreeBtn" onClick={() => newCard('generateFreeBtn',bingoArray)}>Get your Bingo Coupon</button>
@@ -104,7 +151,6 @@ const Bingo = ({bingoArray,token}) => (
                                   main {
                                                   background: #1abc9c;
                                                   display: flex;
-                                                  height: 100vh;
                                                   align-content: center;
                                                   justify-content: center;
                                                   align-items: center;
@@ -238,7 +284,7 @@ const Bingo = ({bingoArray,token}) => (
                                                 }
                                                 @media only screen and (max-width:800px) {
                                                   /* For tablets: */
-                                                  .main, .button3, .button2, .main, .right{
+                                                  .main, .button3, .button2, .main, .right, .iframe{
                                                     width: 100%;
                                                     padding: 0;
                                                   }
@@ -248,7 +294,7 @@ const Bingo = ({bingoArray,token}) => (
                                                 }
                                                 @media only screen and (max-width:500px) {
                                                   /* For mobile phones: */
-                                                  .menu, .main, .right{
+                                                  .menu, .main, .right, .iframe{
                                                     width: 100%;
                                                   }
                                                   .button3,.button2{
