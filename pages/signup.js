@@ -23,7 +23,7 @@ class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.register(
-      { username: this.state.email, password: this.state.password },
+      { username: this.state.email, password: this.state.password, firstName: this.state.firstName },
       'bingo-rest/user/register'
     );
     //this.setRegistrationSuccessMessage();
@@ -39,6 +39,24 @@ class Signup extends React.Component {
           className="container"
           style={{ width: '540px' }}
         >
+           <div className="field">
+                      <p className="control has-icons-left has-icons-right">
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="nickName"
+                          required
+                          value={this.state.firstName}
+                          onChange={e => this.setState({ firstName: e.target.value })}
+                        />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-envelope" />
+                        </span>
+                        <span className="icon is-small is-right">
+                          <i className="fas fa-check" />
+                        </span>
+                      </p>
+                    </div>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
               <input

@@ -25,9 +25,9 @@ const authenticate = ({ username, password }, type) => {
 };
 
 // gets token from the api and stores it in the redux store and in cookie
-const register = ({ username, password }, type) => {
+const register = ({ username, password, firstName }, type) => {
   return (dispatch) => {
-    axios.post(`${API}/${type}`, { username, password })
+    axios.post(`${API}/${type}`, { username, password, firstName })
       .then((response) => {
         if(response.data.successful){
          dispatch({type:DEAUTHENTICATE, registerMessage: "Success"});
@@ -43,7 +43,7 @@ const register = ({ username, password }, type) => {
   };
 };
 
-const createToken = ({ username }) => {
+const createToken = ({ username,firstName }) => {
   return (dispatch) => {
   const responseCount = axios.get(`${API}/bingo-rest/bingo/count/Guest`,{
                  params: {
@@ -53,7 +53,8 @@ const createToken = ({ username }) => {
                   if(responseCount.data==0){
                       axios.get(`${API}/bingo-rest/bingo/create/guest`,{
                                     params: {
-                                      username: username
+                                      username: username,
+                                      firstName: firstName
                                       }
                                     })
                         .then((response) => {

@@ -20,19 +20,37 @@ class Guest extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
       this.props.createToken(
-        { username: this.state.email}
+        { username: this.state.email, firstName: this.state.firstName}
       );
   }
 
   render() {
     return (
-      <Layout title="Sign In">
-        <h3 className="title is-3">Sign In</h3>
+      <Layout title="Guest">
+        <h3 className="title is-3">Guest Login</h3>
         <form
           onSubmit={this.handleSubmit.bind(this)}
           className="container"
           style={{ width: '540px' }}
         >
+         <div className="field">
+                              <p className="control has-icons-left has-icons-right">
+                                <input
+                                  className="input"
+                                  type="text"
+                                  placeholder="Nick Name"
+                                  required
+                                  value={this.state.firstName}
+                                  onChange={e => this.setState({ firstName: e.target.value })}
+                                />
+                                <span className="icon is-small is-left">
+                                  <i className="fas fa-envelope" />
+                                </span>
+                                <span className="icon is-small is-right">
+                                  <i className="fas fa-check" />
+                                </span>
+                              </p>
+                            </div>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
               <input
